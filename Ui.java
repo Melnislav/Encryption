@@ -22,7 +22,14 @@ public class Ui {
         return scanner.nextLine();
     }
 
-    public static void wrongPath() {
+    public static void wrongEnter() {
         System.out.println("Entered incorrect address");
+    }
+
+    public static int getShift() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter shift, please");
+        while (!scanner.hasNextInt()) System.out.println("Enter shift, please");
+        return scanner.nextInt();
     }
 }
