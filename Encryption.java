@@ -4,14 +4,15 @@ import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-public class Encryption {
-    public static void cesar() {
+class Encryption {
+    protected static void encryption() {
         boolean fileNotFound = true;
         while (fileNotFound) {
             String fileAddress = choseFile();
             String fileName = "processed_" + Path.of(fileAddress).getFileName();
             int symbol;
             int shift = Ui.getShift();
+            if (Ui.method.equals("Cesar")) shift = shift * (-1); //means decryption by Cesar was chosen
             try (FileInputStream input = new FileInputStream(fileAddress);
                  InputStreamReader reader = new InputStreamReader(input);
                  FileOutputStream output = new FileOutputStream(Path.of(fileAddress).resolveSibling(fileName).toFile())) {
@@ -21,12 +22,14 @@ public class Encryption {
                 }
                 fileNotFound = false;
             } catch (Exception e) {
-                System.out.println("Something wrong with file, try to choose another one");
+                Ui.wrongEnter();
+                System.out.println("Choose another file");
             }
         }
+        Ui.beginning();
     }
 
-    private static String choseFile() {
+    protected static String choseFile() {
         String path = Ui.path();
         try {
             while (!Files.isRegularFile(Path.of(path))) {
