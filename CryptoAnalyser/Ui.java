@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class Ui {
+class Ui {
     protected static String method;
 
     protected static void beginning() {
@@ -40,7 +40,7 @@ public class Ui {
             }
             if (input.equals("2")) {
                 method = "Brute";
-                Encryption.encryption();
+                BruteForce.encryption();
             }
             if (input.equals("3")) {
                 System.exit(0);

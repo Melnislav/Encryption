@@ -3,15 +3,15 @@ import java.io.FileOutputStream;
 import java.io.InputStreamReader;
 import java.nio.file.Path;
 
-class Encryption implements ChoseFile {
+class BruteForce extends Encryption {
     protected static void encryption() {
         boolean fileNotFound = true;
         while (fileNotFound) {
             String fileAddress = ChoseFile.choseFile();
             String fileName = "processed_" + Path.of(fileAddress).getFileName();
             int symbol;
-            int shift = Ui.getShift();
-            if (Ui.method.equals("Cesar")) shift = shift * (-1); //means decryption by Cesar was chosen
+            boolean pattern = false;
+            int shift = 1;
             try (FileInputStream input = new FileInputStream(fileAddress);
                  InputStreamReader reader = new InputStreamReader(input);
                  FileOutputStream output = new FileOutputStream(Path.of(fileAddress).resolveSibling(fileName).toFile())) {
